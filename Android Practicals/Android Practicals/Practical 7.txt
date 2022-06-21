@@ -1,0 +1,124 @@
+activity_main.xml
+-----------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Single Radio Buttons"
+        android:gravity="center"
+        android:textSize="20sp" />
+
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Radio Button 1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGrp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nWhich is your fvavourite subject : "
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/RbtnAndroid"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Android"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RbtnPython"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Python"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/RbtnJava"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Java"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp" />
+
+    </RadioGroup>
+
+
+</LinearLayout>
+
+MainActivity.java
+-----------------
+
+package com.example.radiobuttondemo;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    RadioButton radioButton;
+    RadioGroup radioGroup1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        radioGroup1 = findViewById(R.id.radioGrp1);
+
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selectedId = radioGroup1.getCheckedRadioButtonId();
+                radioButton = findViewById(selectedId);
+                Toast.makeText(MainActivity.this, "Selected Button is : " + radioButton.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void ButtonClicked(View view)
+    {
+        int selectedId = radioGroup1.getCheckedRadioButtonId();
+        radioButton = findViewById(selectedId);
+        if (selectedId == -1)
+        {
+            Toast.makeText(this, "Nothing Selected", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Selected Button is : "+ radioButton.getText(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+}

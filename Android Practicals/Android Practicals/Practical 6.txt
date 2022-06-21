@@ -1,0 +1,182 @@
+activity_checkbox.xml
+-----------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Checkbox_activity">
+
+    <CheckBox
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="Android"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
+
+</LinearLayout>
+
+activity_main.xml
+-----------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/checkbox_design"
+    tools:context=".MainActivity">
+
+        <CheckBox
+            android:id="@+id/chkCamera"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:text="  Camera"
+            android:textStyle="bold"
+            android:layout_gravity=""
+            android:layout_margin="20dp"
+            android:button="@drawable/ic_camera"/>
+<!--            android:background="@drawable/checkbox_selection"-->
+
+
+        <CheckBox
+            android:id="@+id/chkWifi"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:text="    WiFi"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:button="@drawable/ic_wifi"
+            />
+
+        <CheckBox
+            android:id="@+id/chkBluethooth"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:text="    Bluethooth"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:button="@drawable/ic_bluetooth"
+            />
+
+        <CheckBox
+            android:id="@+id/chkFlight"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:text="    Flight"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:button="@drawable/ic_flight"
+            />
+
+        <CheckBox
+            android:id="@+id/chkMute"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:text="    Mute"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:button="@drawable/ic_mute"
+            />
+</LinearLayout>
+
+MainActivity.java
+-----------------
+
+package com.example.checkboxdemo;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, Checkbox_activity.class);
+                startActivity(intent);
+                finish();
+            }
+        },400);*/
+    }
+
+
+    public void onCheckBoxChecked(View view)
+    {
+        CheckBox checkBox = findViewById(view.getId());
+
+        switch (view.getId())
+        {
+            case R.id.chkBluethooth:
+                if (checkBox.isChecked())
+                {
+                    Toast.makeText(this, "Blethooth is ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Bluethooth is OFF", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.chkWifi:
+                if (checkBox.isChecked())
+                {
+                    Toast.makeText(this, "Wifi is ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Wifi is OFF", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.chkMute:
+                if (checkBox.isChecked())
+                {
+                    Toast.makeText(this, "Mute Mode is ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Mute Mode is OFF", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.chkFlight:
+                if (checkBox.isChecked())
+                {
+                    Toast.makeText(this, "Flight Mode is ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Flight Mode is OFF", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.chkCamera:
+                if (checkBox.isChecked())
+                {
+                    Toast.makeText(this, "Camera is ON", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "Camera is OFF", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+}

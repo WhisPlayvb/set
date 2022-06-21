@@ -1,0 +1,22 @@
+package com.example.missionpart1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+public class MainActivity extends AppCompatActivity {
+    AutoCompleteTextView autoCompleteTextView;
+            ArrayAdapter<String> arrayAdapter;
+            String[] iteam={"pune","mumbai","nagpur"};
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        autoCompleteTextView = findViewById(R.id.autocomplete);
+        arrayAdapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_expandable_list_item_1,iteam);
+        autoCompleteTextView.setAdapter(arrayAdapter);
+
+    }
+}
