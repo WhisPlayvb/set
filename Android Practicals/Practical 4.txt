@@ -1,0 +1,156 @@
+activity_main.xml
+-----------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/google"
+        android:layout_gravity="center"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/actv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:completionHint="Select a country"
+        android:completionThreshold="1"
+        android:hint="    Select a country"
+        android:background="@drawable/inputs"
+        android:drawableStart="@drawable/ic_search"
+        android:paddingLeft="20dp"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/selectCountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:background="@drawable/inputs1"
+        android:layout_margin="20dp"
+        android:editable="false"/>
+
+        <EditText
+            android:id="@+id/countryinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            android:background="@drawable/inputs"
+            android:padding="10dp"
+            android:visibility="invisible"/>
+
+
+</LinearLayout>
+
+MainActivity.java
+-----------------
+
+package com.example.autotextview;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private static final String[] COUNTRIES;
+    EditText edtCountryInfo;
+    TextView txtCountryName;
+    static
+    {
+        COUNTRIES = new String[]
+                {
+                        "India","America","Japan","Russia","China","Sri Lanka","Austrilia","UK"
+                };
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.actv);
+        txtCountryName = findViewById(R.id.selectCountry);
+        edtCountryInfo = findViewById(R.id.countryinfo);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, COUNTRIES);
+
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setOnItemClickListener(this);
+    }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        // fetch the user selected value
+        String country = parent.getItemAtPosition(position).toString();
+
+        // create Toast with user selected value
+        //Toast.makeText(MainActivity.this, "Selected Item is: \t" + item, Toast.LENGTH_LONG).show();
+
+        //Comparing country names
+        edtCountryInfo.setVisibility(View.VISIBLE);
+        if (country.equals("India"))
+        {
+            edtCountryInfo.setText("India has a population of 1.32 billion people; more than one sixth of the world population. India is a democratic republic with a largely ceremonial president, and a prime minister that runs the cabinet. India is divided into 29 states and 7 territories. About two thirds of Indians work in agriculture.");
+        }
+        else if(country.equals("America"))
+        {
+            edtCountryInfo.setText("The United States of America is the world's third largest country in size and nearly the third largest in terms of population. Located in North America, the country is bordered on the west by the Pacific Ocean and to the east by the Atlantic Ocean.");
+        }
+        else if (country.equals("Japan"))
+        {
+            edtCountryInfo.setText("Japan is an archipelago, or string of islands, on the eastern edge of Asia. There are four main islands: Hokkaido, Honshu, Shikoku, and Kyushu. There are also nearly 4,000 smaller islands! Japan's nearest mainland neighbors are the Siberian region of Russia in the north and Korea and China farther south.");
+        }
+        else if (country.equals("China"))
+        {
+            edtCountryInfo.setText("The People's Republic of China was founded in 1949 after the Communist Party defeated the nationalist Kuomintang, who retreated to Taiwan, creating two rival Chinese states - the People's Republic on the mainland and the Republic of China based on Taiwan.");
+        }
+        else if (country.equals("Sri Lanka"))
+        {
+            edtCountryInfo.setText("Sri Lanka is an island in the Indian Ocean and lies southeast of India. The country is known for its vast plains and impressive mountain tops, tea plantations, and beautiful temples. The island was formerly known as Ceylon, a name which is still used for the tea that comes from Sri Lanka.");
+        }
+        else if (country.equals("Austrilia"))
+        {
+            edtCountryInfo.setText("Australia is an island continent and the world's sixth largest country (7,682,300 sq km). Lying between the Indian and Pacific oceans, the country is approximately 4,000 km from east to west and 3,200 km from north to south, with a coastline 36,735 km long. Canberra is Australia's capital city.");
+        }
+        else if (country.equals("UK"))
+        {
+            edtCountryInfo.setText("The United Kingdom, also called the U.K., consists of a group of islands off the northwest coast of Europe. It is a unique country made up of four nations: England, Wales, Scotland, and Northern Ireland. England, Wales, and Scotland also make up Great Britain.");
+        }
+        else
+        {
+            edtCountryInfo.setText("Information not Available");
+        }
+        country = "Your selected Country is : "+ country;
+        // set user selected value to the TextView
+        txtCountryName.setText(country);
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+}

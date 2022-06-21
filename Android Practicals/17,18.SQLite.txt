@@ -1,0 +1,394 @@
+activity_main.xml
+-----------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Surname"
+        app:layout_constraintStart_toEndOf="@+id/surname"
+        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+
+    <EditText
+        android:id="@+id/edtMarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Marks"
+        app:layout_constraintStart_toEndOf="@+id/marks"
+        app:layout_constraintTop_toBottomOf="@+id/edtSurname" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="88dp"
+        android:text="Name : "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
+        android:text="Surname : "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/marks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:text="Marks : "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surname" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="66dp"
+        android:text="Add Data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btnViewAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:text="View ALl"
+        app:layout_constraintStart_toEndOf="@+id/btnAdd"
+        app:layout_constraintTop_toBottomOf="@+id/edtId" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="36dp"
+        android:text="Update"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="ID : "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/marks" />
+
+    <EditText
+        android:id="@+id/edtId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="ID"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/edtMarks" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="40dp"
+        android:text="Delete"
+        app:layout_constraintStart_toEndOf="@+id/btnUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewAll" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="35dp"
+        android:text="Search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+-----------------
+
+package com.example.sqliteapp;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    DatabaseHelper mydb;
+    EditText edtName, edtSurname, edtMarks, edtId;
+    Button btnAdd, btnViewALl, btnUpdate, btnDelete, btnSearch;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mydb = new DatabaseHelper(this);
+        edtName = findViewById(R.id.edtName);
+        edtSurname = findViewById(R.id.edtSurname);
+        edtMarks = findViewById(R.id.edtMarks);
+        edtId = findViewById(R.id.edtId);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnViewALl = findViewById(R.id.btnViewAll);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnDelete = findViewById(R.id.btnDelete);
+        btnSearch = findViewById(R.id.btnSearch);
+        setAddData();
+        viewAll();
+        updateData();
+        deleteData();
+        searchData();
+    }
+    public void setAddData()
+    {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean bool =  mydb.insertData(edtName.getText().toString(), edtSurname.getText().toString(), edtMarks.getText().toString());
+                if (bool == true)
+                    Toast.makeText(MainActivity.this, "Data Inserted Successfully...!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this, "Data Not Inserted...!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void viewAll()
+    {
+        btnViewALl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor res = mydb.getAllData();
+                if (res.getCount() == 0)
+                {
+                    //show message
+                    showMessage("Error : ", "Nothing Found...!");
+                    return;
+                }
+
+                StringBuffer buffer = new StringBuffer();
+                while (res.moveToNext())
+                {
+                    buffer.append("ID : "+ res.getString(0) + "\n");
+                    buffer.append("NAME : "+ res.getString(1) + "\n");
+                    buffer.append("SURNAME : "+ res.getString(2) + "\n");
+                    buffer.append("MARKS : "+ res.getString(3) + "\n\n");
+
+                }
+
+                showMessage("Data : ", buffer.toString());
+            }
+        });
+    }
+
+    public void showMessage(String title, String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
+    }
+
+    public void updateData()
+    {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isUpdated = mydb.updateData(edtId.getText().toString(), edtName.getText().toString(), edtSurname.getText().toString(), edtMarks.getText().toString());
+                if (isUpdated == true)
+                    Toast.makeText(MainActivity.this, "Data Updated Successfully...!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this, "Data Not Updated...!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void deleteData()
+    {
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int deletedRows = mydb.deleteData(edtId.getText().toString());
+                if (deletedRows > 0)
+                    Toast.makeText(MainActivity.this, "Data Deleted Successfully...!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this, "Data Not Deleted...!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void searchData()
+    {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor res = mydb.searchData(edtId.getText().toString());
+                if (res.getCount() == 0)
+                {
+                    //show message
+                    showMessage("Error : ", "Nothing Found...!");
+                    return;
+                }
+
+                StringBuffer buffer = new StringBuffer();
+                while (res.moveToNext())
+                {
+                    buffer.append("ID : "+ res.getString(0) + "\n");
+                    buffer.append("NAME : "+ res.getString(1) + "\n");
+                    buffer.append("SURNAME : "+ res.getString(2) + "\n");
+                    buffer.append("MARKS : "+ res.getString(3) + "\n\n");
+
+                }
+
+                showMessage("Data : ", buffer.toString());
+            }
+        });
+    }
+}
+
+DatabaseHelper.java
+-------------------
+
+package com.example.sqliteapp;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
+    public static final String DATABASE_NAME = "Student.db";
+    public static final String TABLE_NAME = "Student_table";
+    public static final String COL1 = "ID";
+    public static final String COL2 = "NAME";
+    public static final String COL3 = "SURNAME";
+    public static final String COL4 = "MARKS";
+
+
+    public DatabaseHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "( " + COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ COL2 + " TEXT, "+ COL3 + " TEXT," + COL4 + " INTEGER);");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    public boolean insertData(String name, String surname, String marks)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2, name);
+        contentValues.put(COL3, surname);
+        contentValues.put(COL4, marks);
+        long res = db.insert(TABLE_NAME, null, contentValues);
+        if (res == -1)
+            return false;
+        else
+            return true;
+    }
+    public Cursor getAllData()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
+    }
+
+    public boolean updateData(String id, String name, String surname, String marks)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL1, id);
+        contentValues.put(COL2, name);
+        contentValues.put(COL3, surname);
+        contentValues.put(COL4, marks);
+        db.update(TABLE_NAME , contentValues, "ID = ?",new String[] { id });
+        return true;
+    }
+
+    public int deleteData(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, " ID = ?", new String[] { id });
+    }
+
+    public Cursor searchData(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql="SELECT * FROM "+ TABLE_NAME +" WHERE "+ COL1 +" LIKE '%"+ id +"%'";
+        Cursor res = db.rawQuery(sql, null);
+        return res;
+    }
+}

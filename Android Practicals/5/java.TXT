@@ -1,0 +1,56 @@
+package com.example.missionpart1;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+
+
+public class MainActivity extends AppCompatActivity {
+    ToggleButton toggleButton1,toggleButton2;
+    TextView textView1,textView2,textView3,textView4;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        toggleButton1=findViewById(R.id.toggleButton1);
+        toggleButton2=findViewById(R.id.toggleButton2);
+        textView1=findViewById(R.id.textView1);
+        textView2=findViewById(R.id.textView2);
+        textView3=findViewById(R.id.textView3);
+        textView4=findViewById(R.id.textView4);
+
+        toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(toggleButton1.isChecked())
+                {
+                    textView3.setText("Bluetook button is checked");
+                }
+                else
+                {
+                    textView3.setText("Nluetooht button is unchecked");
+                }
+            }
+        });
+
+        toggleButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(toggleButton2.isChecked())
+                {
+                    textView4.setText("Bluetook button is checked");
+                }
+                else
+                {
+                    textView4.setText("Nluetooht button is unchecked");
+                }
+            }
+        });
+
+    }
+}
